@@ -47,13 +47,13 @@ namespace Products_N_Categories.Controllers
             return RedirectToAction("Categories");
         }
 
-        [HttpGet("categories/{categoryId:int}")]
-        public IActionResult CategoryDetails(int categoryId)
+        [HttpGet("categories/details/{id}")]
+        public IActionResult CategoryDetails(int Id)
         {
             var category = _context.Categories
                 .Include(c => c.Products)
-                .ThenInclude(cp => cp.ProductId)
-                .FirstOrDefault(c => c.CategoryId == categoryId);
+                // .ThenInclude(cp => cp.Product)
+                .FirstOrDefault(c => c.CategoryId == Id);
 
             if (category == null)
             {
@@ -61,7 +61,7 @@ namespace Products_N_Categories.Controllers
             }
 
             var unassociatedProducts = _context.Products
-                .Where(p => !p.Categories.Any(cp => cp.CategoryId == categoryId))
+                .Where(p => !p.Categories.Any(c => c.CategoryId == Id))
                 .ToList();
 
             var viewModel = new CategoryDetailsPageViewModel()
@@ -69,7 +69,7 @@ namespace Products_N_Categories.Controllers
                 Category = category,
                 Association = new Association()
                 {
-                    CategoryId = categoryId
+                    CategoryId = Id
                 },
                 Products = unassociatedProducts,
             };
@@ -90,5 +90,6 @@ namespace Products_N_Categories.Controllers
             _context.SaveChanges();
             return RedirectToAction("CategoryDetails", new { categoryId });
         }
+       
     }
 }

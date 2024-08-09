@@ -102,3 +102,4 @@ C:\Users\keimh\Products-N-Categories\obj\Debug\net8.0\refint\Products-N-Categori
 C:\Users\keimh\Products-N-Categories\obj\Debug\net8.0\Products-N-Categories.pdb
 C:\Users\keimh\Products-N-Categories\obj\Debug\net8.0\Products-N-Categories.genruntimeconfig.cache
 C:\Users\keimh\Products-N-Categories\obj\Debug\net8.0\ref\Products-N-Categories.dll
+C:\Users\keimh\Products-N-Categories\obj\Debug\net8.0\Products-N-Categories.sourcelink.json
