@@ -1,0 +1,56 @@
+@model CategoriesPageViewModel
+
+@{
+    var category = Model.Category;
+    var categories = Model.Categories;
+    ViewData["Title"] = "Categories";
+}
+
+<section>
+    <h1 class="display-4 mb-3">Categories</h1>
+    <div class="text-center mb-3">
+        <p>
+            <a href="/Products">Products</a> |
+            <a href="/Categories">Categories</a>
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <h2 class="display-6 mb-3">All Categories</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Products</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cat in categories)
+                    {
+                        <tr>
+                            <td>@cat.Name</td>
+                            <td>
+                                @foreach (var product in cat.Products)
+                                {
+                                    @product.Name <br />
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="CategoryDetails" asp-route-id="@cat.CategoryId">Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 col-md-6">
+            <h2 class="display-6 mb-3">Add a Category</h2>
+            @await Html.PartialAsync("_AddACategory", category)
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/focus-input.js"></script>
+}
